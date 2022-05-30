@@ -12,7 +12,7 @@ const SearchBar = () => {
       type="search"
       value={searchValue}
       onChange={(e) => updateSearchValue(e.target.value)}
-      placeholder="Search for an item..."
+      placeholder="Search for an item or recipe ingredient..."
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
