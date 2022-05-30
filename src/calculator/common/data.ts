@@ -915,4 +915,71 @@ export const data: { [itemName: string]: Recipe } = {
     "Water-filled Bottle": 4,
     "Golden Jewellery": 6,
   },
+  "Dark Silver Sword": {
+    "Dark Silver Ingot": 12,
+    "Reinforced Plank": 6,
+  },
+  "Dark Silver Axes": {
+    "Dark Silver Ingot": 12,
+    "Reinforced Plank": 6,
+  },
+  "Dark Silver Mace": {
+    "Dark Silver Ingot": 12,
+    "Reinforced Plank": 6,
+  },
+  "Dark Silver Spear": {
+    "Dark Silver Ingot": 12,
+    "Reinforced Plank": 6,
+  },
+  "Dark Silver Reaper": {
+    "Dark Silver Ingot": 12,
+    "Reinforced Plank": 6,
+  },
+  "Dark Silver Slashers": {
+    "Dark Silver Ingot": 12,
+    "Reinforced Plank": 6,
+  },
+  "Sanguine Sword": {
+    "Dark Silver Sword": 1,
+    "Flawless Sapphire": 3,
+    "Primal Blood Essence": 3,
+    "Pristine Leather": 9,
+  },
+  "Sanguine Axes": {
+    "Dark Silver Axes": 1,
+    "Flawless Ruby": 3,
+    "Primal Blood Essence": 3,
+    "Pristine Leather": 9,
+  },
+  "Sanguine Mace": {
+    "Dark Silver Mace": 1,
+    "Flawless Topaz": 3,
+    "Primal Blood Essence": 3,
+    "Pristine Leather": 9,
+  },
+  "Sanguine Spear": {
+    "Dark Silver Spear": 1,
+    "Flawless Emerald": 3,
+    "Primal Blood Essence": 3,
+    "Pristine Leather": 9,
+  },
+  "Sanguine Reaper": {
+    "Dark Silver Reaper": 1,
+    "Flawless Miststone": 3,
+    "Primal Blood Essence": 3,
+    "Pristine Leather": 9,
+  },
+  "Sanguine Slashers": {
+    "Dark Silver Slashers": 1,
+    "Flawless Amethyst": 3,
+    "Primal Blood Essence": 3,
+    "Pristine Leather": 9,
+  },
+  "Golden Castle Key": {
+    "Primal Blood Essence": 9,
+    "Gold Ingot": 18,
+    "Spectral Dust": 30,
+    "Dark Silver Ingot": 60,
+    "Reinforced Plank": 60,
+  },
 };
