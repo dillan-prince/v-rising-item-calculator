@@ -10,7 +10,7 @@ const Recipe = () => {
   const [numberToCreate, setNumberToCreate] = useState(1);
 
   const dataItem = data[selectedItem];
-  const recipes = (useMatchingFloorDiscount && dataItem.discountedRecipes) || dataItem.fullPriceRecipes;
+  const recipes = (useMatchingFloorDiscount && dataItem?.discountedRecipes) || dataItem?.fullPriceRecipes || [];
 
   return (
     <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
