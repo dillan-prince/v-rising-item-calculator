@@ -39,6 +39,11 @@ const Recipe = () => {
             />
           </Grid>
           <Grid item xs={48}>
+            <Typography variant="body2" sx={{ marginLeft: 2 }}>
+              Source: {dataItem.source}
+            </Typography>
+          </Grid>
+          <Grid item xs={48}>
             {recipes.length === 1
               ? Object.keys(recipes[0]).map(
                   (key) => key !== "amountMade" && <Material key={key} count={recipes[0][key]} name={key} />,
