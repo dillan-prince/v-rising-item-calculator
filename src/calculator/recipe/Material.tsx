@@ -3,7 +3,7 @@ import ArrowRight from "@mui/icons-material/ArrowRight";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import CalculatorContext from "calculator/common/CalculatorContext";
-import { data } from "calculator/common/data";
+import { data, RecipeType } from "calculator/common/data";
 import { useContext, useState } from "react";
 
 type MaterialProps = {
@@ -18,28 +18,38 @@ const Material = ({ name, count }: MaterialProps) => {
 
   const isExpandable = Object.keys(data).includes(name);
 
+  const renderMaterial = (recipe: RecipeType, materialName: string) => (
+    <Material
+      key={materialName}
+      count={recipe[materialName] * Math.ceil(count / recipe.amountMade)}
+      name={materialName}
+    />
+  );
+
+  const renderOneRecipe = (recipe: RecipeType) => {
+    return Object.keys(recipe).map((key) => key !== "amountMade" && renderMaterial(recipe, key));
+  };
+
+  const renderMultipleRecipes = (recipes: RecipeType[]) => {
+    return recipes.map((recipe) => (
+      <>
+        <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
+          {Object.keys(recipe).map((key) => key !== "amountMade" && renderMaterial(recipe, key))}
+        </Box>
+        <Typography variant="h6" sx={{ paddingLeft: 1, ":last-child": { display: "none" } }}>
+          OR
+        </Typography>
+      </>
+    ));
+  };
+
   const renderExpandedMaterialList = () => {
     const dataItem = data[name];
     const recipes = (useMatchingFloorDiscount && dataItem.discountedRecipes) || dataItem.fullPriceRecipes;
 
     return (
       <Grid item xs={12}>
-        {recipes.length === 1
-          ? Object.keys(recipes[0]).map(
-              (key) => key !== "amountMade" && <Material key={key} count={recipes[0][key]} name={key} />,
-            )
-          : recipes.map((recipe) => (
-              <>
-                <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
-                  {Object.keys(recipe).map(
-                    (key) => key !== "amountMade" && <Material key={key} count={recipe[key]} name={key} />,
-                  )}
-                </Box>
-                <Typography variant="h6" sx={{ paddingLeft: 1, ":last-child": { display: "none" } }}>
-                  OR
-                </Typography>
-              </>
-            ))}
+        {recipes.length === 1 ? renderOneRecipe(recipes[0]) : renderMultipleRecipes(recipes)}
       </Grid>
     );
   };

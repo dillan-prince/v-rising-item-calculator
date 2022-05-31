@@ -1,7 +1,7 @@
 import { Box, Checkbox, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import CalculatorContext from "calculator/common/CalculatorContext";
-import { data } from "calculator/common/data";
+import { data, RecipeType } from "calculator/common/data";
 import Material from "calculator/recipe/Material";
 import { useContext, useState } from "react";
 
@@ -11,6 +11,31 @@ const Recipe = () => {
 
   const dataItem = data[selectedItem];
   const recipes = (useMatchingFloorDiscount && dataItem?.discountedRecipes) || dataItem?.fullPriceRecipes || [];
+
+  const renderMaterial = (recipe: RecipeType, materialName: string) => (
+    <Material
+      key={materialName}
+      count={recipe[materialName] * Math.ceil(numberToCreate / recipe.amountMade)}
+      name={materialName}
+    />
+  );
+
+  const renderOneRecipe = (recipe: RecipeType) => {
+    return Object.keys(recipe).map((key) => key !== "amountMade" && renderMaterial(recipe, key));
+  };
+
+  const renderMultipleRecipes = () => {
+    return recipes.map((recipe) => (
+      <>
+        <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
+          {Object.keys(recipe).map((key) => key !== "amountMade" && renderMaterial(recipe, key))}
+        </Box>
+        <Typography variant="h6" sx={{ paddingLeft: 1, ":last-child": { display: "none" } }}>
+          OR
+        </Typography>
+      </>
+    ));
+  };
 
   return (
     <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
@@ -44,22 +69,7 @@ const Recipe = () => {
             </Typography>
           </Grid>
           <Grid item xs={48}>
-            {recipes.length === 1
-              ? Object.keys(recipes[0]).map(
-                  (key) => key !== "amountMade" && <Material key={key} count={recipes[0][key]} name={key} />,
-                )
-              : recipes.map((recipe) => (
-                  <>
-                    <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
-                      {Object.keys(recipe).map(
-                        (key) => key !== "amountMade" && <Material key={key} count={recipe[key]} name={key} />,
-                      )}
-                    </Box>
-                    <Typography variant="h6" sx={{ paddingLeft: 1, ":last-child": { display: "none" } }}>
-                      OR
-                    </Typography>
-                  </>
-                ))}
+            {recipes.length === 1 ? renderOneRecipe(recipes[0]) : renderMultipleRecipes()}
           </Grid>
         </Grid>
       ) : (
