@@ -12,9 +12,10 @@ export const searchItems = (searchValue: string) => {
   const itemNamesWithIngredientsContainingSearchValue = itemNames
     .filter(
       (itemName) =>
-        Object.keys(data[itemName]).some((ingredientName) =>
-          ingredientName.toLowerCase().includes(searchValueLowerCase),
-        ) && !itemNamesContainingSearchValue.includes(itemName),
+        !itemNamesContainingSearchValue.includes(itemName) &&
+        data[itemName].fullPriceRecipes.some((recipe) =>
+          Object.keys(recipe).some((ingredient) => ingredient.toLowerCase().includes(searchValueLowerCase)),
+        ),
     )
     .sort();
 
