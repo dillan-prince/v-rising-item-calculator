@@ -1,19 +1,19 @@
-type Recipe = {
+export type RecipeType = {
   amountMade: number;
   [itemName: string]: number;
 };
 
-type DataRow = {
+export type DataRowType = {
   source: string;
-  fullPriceRecipes: Recipe[];
-  discountedRecipes?: Recipe[];
+  fullPriceRecipes: RecipeType[];
+  discountedRecipes?: RecipeType[];
 };
 
-type Data = {
-  [itemName: string]: DataRow;
+export type DataType = {
+  [itemName: string]: DataRowType;
 };
 
-export const simpleWorkbenchRecipes: Data = {
+export const simpleWorkbenchRecipes: DataType = {
   "Reinforced Bone Sword": {
     source: "Forge > Simple Workbench",
     fullPriceRecipes: [
@@ -639,7 +639,7 @@ export const simpleWorkbenchRecipes: Data = {
   },
 };
 
-export const furnaceRecipes: Data = {
+export const furnaceRecipes: DataType = {
   "Copper Ingot": {
     source: "Forge > Furnace",
     fullPriceRecipes: [
@@ -772,7 +772,7 @@ export const furnaceRecipes: Data = {
   },
 };
 
-export const smithyRecipes: Data = {
+export const smithyRecipes: DataType = {
   "Iron Body": {
     source: "Forge > Smithy",
     fullPriceRecipes: [
@@ -1039,7 +1039,7 @@ export const smithyRecipes: Data = {
   },
 };
 
-export const anvilRecipes: Data = {
+export const anvilRecipes: DataType = {
   "Dark Silver Sword": {
     source: "Forge > Anvil",
     fullPriceRecipes: [
@@ -1293,14 +1293,14 @@ export const anvilRecipes: Data = {
   },
 };
 
-export const forgeRecipes: Data = {
+export const forgeRecipes: DataType = {
   ...simpleWorkbenchRecipes,
   ...furnaceRecipes,
   ...smithyRecipes,
   ...anvilRecipes,
 };
 
-export const tanneryRecipes: Data = {
+export const tanneryRecipes: DataType = {
   Leather: {
     source: "Tailor > Tannery",
     fullPriceRecipes: [
@@ -1352,7 +1352,7 @@ export const tanneryRecipes: Data = {
   },
 };
 
-export const loomRecipes: Data = {
+export const loomRecipes: DataType = {
   Cloth: {
     source: "Tailor > Loom",
     fullPriceRecipes: [
@@ -1459,7 +1459,7 @@ export const loomRecipes: Data = {
   },
 };
 
-export const tailoringBenchRecipes: Data = {
+export const tailoringBenchRecipes: DataType = {
   "Carpet Roll": {
     source: "Tailor > Tailoring Bench",
     fullPriceRecipes: [
@@ -1830,13 +1830,13 @@ export const tailoringBenchRecipes: Data = {
   },
 };
 
-export const tailorRecipes: Data = {
+export const tailorRecipes: DataType = {
   ...tanneryRecipes,
   ...loomRecipes,
   ...tailoringBenchRecipes,
 };
 
-export const sawmillRecipes: Data = {
+export const sawmillRecipes: DataType = {
   Plank: {
     source: "Workshop > Sawmill",
     fullPriceRecipes: [
@@ -1886,7 +1886,7 @@ export const sawmillRecipes: Data = {
   },
 };
 
-export const grinderRecipes: Data = {
+export const grinderRecipes: DataType = {
   "Stone Brick": {
     source: "Workshop > Grinder",
     fullPriceRecipes: [
@@ -1985,7 +1985,7 @@ export const grinderRecipes: Data = {
   },
 };
 
-export const woodworkingBenchRecipes: Data = {
+export const woodworkingBenchRecipes: DataType = {
   "Painting Frame": {
     source: "Workshop > Woodworking Bench",
     fullPriceRecipes: [
@@ -2149,13 +2149,13 @@ export const woodworkingBenchRecipes: Data = {
   },
 };
 
-export const workshopRecipes: Data = {
+export const workshopRecipes: DataType = {
   ...sawmillRecipes,
   ...grinderRecipes,
   ...woodworkingBenchRecipes,
 };
 
-export const bloodPressRecipes: Data = {
+export const bloodPressRecipes: DataType = {
   "Blood Essence": {
     source: "Alchemy Lab > Blood Press",
     fullPriceRecipes: [
@@ -2227,7 +2227,7 @@ export const bloodPressRecipes: Data = {
   },
 };
 
-export const alchemyTableRecipes: Data = {
+export const alchemyTableRecipes: DataType = {
   "Vermin Salve": {
     source: "Alchemy Lab > Alchemy Table",
     fullPriceRecipes: [
@@ -2594,7 +2594,7 @@ export const alchemyTableRecipes: Data = {
   },
 };
 
-export const verminNestRecipes: Data = {
+export const verminNestRecipes: DataType = {
   Rat: {
     source: "Alchemy Lab > Vermin Nest",
     fullPriceRecipes: [
@@ -2684,20 +2684,20 @@ export const verminNestRecipes: Data = {
   },
 };
 
-export const alchemyLabRecipes: Data = {
+export const alchemyLabRecipes: DataType = {
   ...bloodPressRecipes,
   ...alchemyTableRecipes,
   ...verminNestRecipes,
 };
 
-export const data: Data = {
+export const data: DataType = {
   ...tailorRecipes,
   ...alchemyLabRecipes,
   ...forgeRecipes,
   ...workshopRecipes,
 };
 
-export const _data: { [itemName: string]: Recipe } = {
+export const _data: { [itemName: string]: RecipeType } = {
   "Alchemy Table": {
     amountMade: 1,
     "Blood Essence": 100,
