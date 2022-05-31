@@ -9,12 +9,13 @@ const Recipe = () => {
   const { selectedItem, useMatchingFloorDiscount, updateUseMatchingFloorDiscount } = useContext(CalculatorContext);
   const [numberToCreate, setNumberToCreate] = useState(1);
 
-  const recipe = data[selectedItem];
+  const dataItem = data[selectedItem];
+  const recipes = (useMatchingFloorDiscount && dataItem.discountedRecipes) || dataItem.fullPriceRecipes;
 
   return (
     <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
-      {recipe ? (
-        <Grid container columns={48} columnSpacing={2} alignItems="center">
+      {dataItem ? (
+        <Grid container columns={48} spacing={2} alignItems="center">
           <Grid item xs={33}>
             <Typography variant="h3">{selectedItem}</Typography>
           </Grid>
@@ -38,9 +39,22 @@ const Recipe = () => {
             />
           </Grid>
           <Grid item xs={48}>
-            {Object.keys(recipe).map((material) => (
-              <Material key={material} name={material} count={recipe[material] * numberToCreate} />
-            ))}
+            {recipes.length === 1
+              ? Object.keys(recipes[0]).map(
+                  (key) => key !== "amountMade" && <Material key={key} count={recipes[0][key]} name={key} />,
+                )
+              : recipes.map((recipe) => (
+                  <>
+                    <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
+                      {Object.keys(recipe).map(
+                        (key) => key !== "amountMade" && <Material key={key} count={recipe[key]} name={key} />,
+                      )}
+                    </Box>
+                    <Typography variant="h6" sx={{ paddingLeft: 1, ":last-child": { display: "none" } }}>
+                      OR
+                    </Typography>
+                  </>
+                ))}
           </Grid>
         </Grid>
       ) : (

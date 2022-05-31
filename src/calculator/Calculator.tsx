@@ -11,7 +11,7 @@ const Calculator = () => {
         container
         columnSpacing={2}
         sx={{
-          maxHeight: "100vh",
+          marginBottom: 2,
         }}
       >
         <Grid item xs={12} sx={(theme) => ({ padding: theme.spacing(2, 0) })}>
