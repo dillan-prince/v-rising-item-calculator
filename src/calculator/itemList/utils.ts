@@ -1,4 +1,4 @@
-import { data } from "calculator/common/data";
+import data from "data";
 
 const itemNames = Object.keys(data).map((key) => key);
 

@@ -3,8 +3,9 @@ import ArrowRight from "@mui/icons-material/ArrowRight";
 import { Box, Grid, IconButton, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import CalculatorContext from "calculator/common/CalculatorContext";
-import { data, RecipeType } from "calculator/common/data";
-import { useContext, useState } from "react";
+import { getImagePath } from "calculator/common/utils";
+import data, { RecipeType } from "data";
+import { Fragment, useContext, useState } from "react";
 
 type MaterialProps = {
   name: string;
@@ -31,15 +32,15 @@ const Material = ({ name, count }: MaterialProps) => {
   };
 
   const renderMultipleRecipes = (recipes: RecipeType[]) => {
-    return recipes.map((recipe) => (
-      <>
+    return recipes.map((recipe, index) => (
+      <Fragment key={`${name}-${index}`}>
         <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
           {Object.keys(recipe).map((key) => key !== "amountMade" && renderMaterial(recipe, key))}
         </Box>
         <Typography variant="h6" sx={{ paddingLeft: 1, ":last-child": { display: "none" } }}>
           OR
         </Typography>
-      </>
+      </Fragment>
     ));
   };
 
@@ -81,9 +82,18 @@ const Material = ({ name, count }: MaterialProps) => {
             </>
           )}
         </Grid>
-        <Grid item xs={23}>
+        <Grid
+          item
+          xs={1}
+          sx={{
+            textAlign: "center",
+          }}
+        >
+          <Box component={"img"} sx={{ marginTop: 1, width: "24px", height: "24px" }} src={getImagePath(name)} />
+        </Grid>
+        <Grid item xs={22}>
           <Grid container>
-            <Grid item xs={12} sx={{ marginY: 1, ":last-child": { marginBottom: 0 } }}>
+            <Grid item xs={12} sx={{ justifyContent: "space-between", marginY: 1, ":last-child": { marginBottom: 0 } }}>
               <Typography variant="body1" component={"span"} sx={{ flexGrow: 1 }}>
                 {name}: {count}
               </Typography>

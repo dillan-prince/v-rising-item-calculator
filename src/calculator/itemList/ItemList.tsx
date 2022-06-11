@@ -18,7 +18,7 @@ const ItemList = () => {
         padding: 1,
         maxHeight: "90vh",
         overflowY: "auto",
-        "& :not(last-child)": {
+        "& > :not(last-child)": {
           marginBottom: 1,
         },
         "& :last-child": {

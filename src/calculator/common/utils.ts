@@ -13,3 +13,9 @@ export const loadContextValueFromStorage = (item: keyof CalculatorContextProps) 
       return localStorage.getItem(getStorageKey(item)) ?? "";
   }
 };
+
+export const getImagePath = (itemName: string): string =>
+  `/images/${itemName
+    .toLowerCase()
+    .replaceAll(" ", "-")
+    .replaceAll(/[^a-z0-9-]/gi, "")}.png`;

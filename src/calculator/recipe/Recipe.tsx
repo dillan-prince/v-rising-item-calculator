@@ -1,39 +1,43 @@
 import { Box, Checkbox, FormControlLabel, Grid, TextField, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import CalculatorContext from "calculator/common/CalculatorContext";
-import { data, RecipeType } from "calculator/common/data";
 import Material from "calculator/recipe/Material";
-import { useContext, useState } from "react";
+import data, { RecipeType } from "data";
+import { Fragment, useContext, useState } from "react";
 
 const Recipe = () => {
   const { selectedItem, useMatchingFloorDiscount, updateUseMatchingFloorDiscount } = useContext(CalculatorContext);
-  const [numberToCreate, setNumberToCreate] = useState(1);
+  const [numberToCreate, setNumberToCreate] = useState("1");
 
   const dataItem = data[selectedItem];
   const recipes = (useMatchingFloorDiscount && dataItem?.discountedRecipes) || dataItem?.fullPriceRecipes || [];
 
-  const renderMaterial = (recipe: RecipeType, materialName: string) => (
-    <Material
-      key={materialName}
-      count={recipe[materialName] * Math.ceil(numberToCreate / recipe.amountMade)}
-      name={materialName}
-    />
-  );
+  const renderMaterial = (recipe: RecipeType, materialName: string) => {
+    const parsedInt = parseInt(numberToCreate);
+
+    return (
+      <Material
+        key={materialName}
+        count={recipe[materialName] * Math.ceil((parsedInt > 0 ? parsedInt : 1) / recipe.amountMade)}
+        name={materialName}
+      />
+    );
+  };
 
   const renderOneRecipe = (recipe: RecipeType) => {
     return Object.keys(recipe).map((key) => key !== "amountMade" && renderMaterial(recipe, key));
   };
 
   const renderMultipleRecipes = () => {
-    return recipes.map((recipe) => (
-      <>
+    return recipes.map((recipe, index) => (
+      <Fragment key={`${selectedItem}-${index}`}>
         <Box sx={{ border: `1px solid ${grey[700]}`, borderRadius: "4px", padding: 1 }}>
           {Object.keys(recipe).map((key) => key !== "amountMade" && renderMaterial(recipe, key))}
         </Box>
         <Typography variant="h6" sx={{ paddingLeft: 1, ":last-child": { display: "none" } }}>
           OR
         </Typography>
-      </>
+      </Fragment>
     ));
   };
 
@@ -48,7 +52,7 @@ const Recipe = () => {
             <TextField
               label="Amount"
               inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-              onChange={(e) => setNumberToCreate(parseFloat(e.target.value) || 1)}
+              onChange={(e) => setNumberToCreate(e.target.value)}
               value={numberToCreate}
             />
           </Grid>
