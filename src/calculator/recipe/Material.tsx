@@ -82,18 +82,10 @@ const Material = ({ name, count }: MaterialProps) => {
             </>
           )}
         </Grid>
-        <Grid
-          item
-          xs={1}
-          sx={{
-            textAlign: "center",
-          }}
-        >
-          <Box component={"img"} sx={{ marginTop: 1, width: "24px", height: "24px" }} src={getImagePath(name)} />
-        </Grid>
-        <Grid item xs={22}>
+        <Grid item xs={23}>
           <Grid container>
-            <Grid item xs={12} sx={{ justifyContent: "space-between", marginY: 1, ":last-child": { marginBottom: 0 } }}>
+            <Grid item xs={12} sx={{ display: "flex", marginY: 1, ":last-child": { marginBottom: 0 } }}>
+              <Box component={"img"} sx={{ width: "24px", height: "24px", marginRight: 1 }} src={getImagePath(name)} />
               <Typography variant="body1" component={"span"} sx={{ flexGrow: 1 }}>
                 {name}: {count}
               </Typography>
